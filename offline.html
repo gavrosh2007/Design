@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нет подключения — HM&AD</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f0e8 0%, #e8e0d5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .offline-card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            border-radius: 48px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(232,73,29,0.3);
+        }
+        .offline-icon { font-size: 5rem; margin-bottom: 1rem; }
+        h1 { color: #e8491d; font-size: 1.8rem; margin-bottom: 0.5rem; }
+        p { color: #333; margin: 1rem 0; line-height: 1.5; }
+        button {
+            background: #e8491d;
+            border: none;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.2s;
+        }
+        button:hover { background: #c04010; }
+        .retry-text { font-size: 0.8rem; opacity: 0.6; margin-top: 1.5rem; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="offline-card">
+        <div class="offline-icon">📡</div>
+        <h1>Нет интернета</h1>
+        <p>Приложение работает в офлайн-режиме.<br>Ранее сохранённые данные доступны.</p>
+        <button onclick="location.reload()">🔄 Попробовать снова</button>
+        <div class="retry-text">HM&AD — автономный дизайн-инструмент</div>
+    </div>
+    <script>
+        // Автоматически перезагружаем при появлении интернета
+        window.addEventListener('online', () => location.reload());
+        
+        // Если страница загрузилась ошибочно при живом интернете — пытаемся перезагрузить через секунду
+        if (navigator.onLine) {
+            setTimeout(() => location.reload(), 1000);
+        }
+    </script>
+</body>
+</html>
